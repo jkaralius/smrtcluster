@@ -1,0 +1,91 @@
+#####################################
+## Configuring StarCluster Plugins ##
+#####################################
+# Sections starting with "plugin" define a custom python class which perform
+# additional configurations to StarCluster's default routines. These plugins
+# can be assigned to a cluster template to customize the setup procedure when
+# starting a cluster from this template (see the commented PLUGINS setting in
+# the 'smallcluster' template above). Below is an example of defining a user
+# plugin called 'myplugin':
+
+# [plugin myplugin]
+# NOTE: myplugin module must either live in ~/.starcluster/plugins or be
+# on your PYTHONPATH
+# SETUP_CLASS = myplugin.SetupClass
+# extra settings are passed as __init__ arguments to your plugin:
+# SOME_PARAM_FOR_MY_PLUGIN = 1
+# SOME_OTHER_PARAM = 2
+
+######################
+## Built-in Plugins ##
+######################
+# The following plugins ship with StarCluster and should work out-of-the-box.
+# Uncomment as needed. Don't forget to update your PLUGINS list!
+# See http://star.mit.edu/cluster/docs/latest/plugins for plugin details.
+#
+# Use this plugin to install one or more packages on all nodes
+#[plugin pkginstaller]
+#SETUP_CLASS = starcluster.plugins.pkginstaller.PackageInstaller
+
+# list of apt-get installable packages
+# PACKAGES = htop, clusterssh
+
+# Use this plugin to create one or more cluster users and download all user ssh
+# keys to $HOME/.starcluster/user_keys/<cluster>-<region>.tar.gz
+# [plugin createusers]
+# SETUP_CLASS = starcluster.plugins.users.CreateUsers
+# NUM_USERS = 30
+
+# # you can also comment out NUM_USERS and specify exact usernames, e.g.
+# # usernames = linus, tux, larry
+# DOWNLOAD_KEYS = True
+
+# Use this plugin to configure the Condor queueing system
+# [plugin condor]
+# SETUP_CLASS = starcluster.plugins.condor.CondorPlugin
+
+# The SGE plugin is enabled by default and not strictly required. Only use this
+# if you want to tweak advanced settings in which case you should also set
+# DISABLE_QUEUE=TRUE in your cluster template. See the plugin doc for more
+# details.
+
+#[plugin sge]
+#SETUP_CLASS = starcluster.plugins.sge.SGEPlugin
+#MASTER_IS_EXEC_HOST = False
+
+# The IPCluster plugin configures a parallel IPython cluster with optional
+# web notebook support. This allows you to run Python code in parallel with low
+# latency message passing via ZeroMQ.
+
+# [plugin ipcluster]
+# SETUP_CLASS = starcluster.plugins.ipcluster.IPCluster
+
+# # Enable the IPython notebook server (optional)
+# ENABLE_NOTEBOOK = True
+
+# # Set a password for the notebook for increased security
+# # This is optional but *highly* recommended
+# NOTEBOOK_PASSWD = a-secret-password
+
+# # Set a custom directory for storing/loading notebooks (optional)
+# NOTEBOOK_DIRECTORY = /path/to/notebook/dir
+
+# # Set a custom packer. Must be one of 'json', 'pickle', or 'msgpack'
+# # This is optional.
+# PACKER = pickle
+
+# Use this plugin to create a cluster SSH "dashboard" using tmux. The plugin
+# creates a tmux session on the master node that automatically connects to all
+# the worker nodes over SSH. Attaching to the session shows a separate window
+# for each node and each window is logged into the node via SSH.
+# [plugin tmux]
+# SETUP_CLASS = starcluster.plugins.tmux.TmuxControlCenter
+
+# Use this plugin to change the default MPI implementation on the
+# cluster from OpenMPI to MPICH2.
+# [plugin mpich2]
+# SETUP_CLASS = starcluster.plugins.mpich2.MPICH2Setup
+
+# Configure a hadoop cluster. (includes dumbo setup)
+# [plugin hadoop]
+# SETUP_CLASS = starcluster.plugins.hadoop.Hadoop
