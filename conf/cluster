@@ -111,9 +111,9 @@ EXTENDS=smrtcluster
 SPOT_BID = 0.50
 
 [cluster devcluster]
-# Declares that this cluster uses mediumcluster as defaults
+# Declares that this cluster uses smrtcluster as default
 EXTENDS=smrtcluster
-# This section is the same as mediumcluster except for the following variables:
+# This section is the same as smrtcluster except for the following variables:
 CLUSTER_SIZE = 2
 
 MASTER_INSTANCE_TYPE = m1.medium
