@@ -1,0 +1,6 @@
+#!/bin/bash
+
+S3HOST="https://s3.amazonaws.com/files.pacb.com/software/smrtanalysis"
+SAVERSION="2.3.0"
+BUILD=140936
+PATCHNUM=p3
